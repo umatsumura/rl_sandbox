@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  rl_sandbox:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: rl_sandbox:latest
+    container_name: rl_sandbox
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - .:/workspace/rl_sandbox
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /dev:/dev
+    network_mode: host
+    privileged: true
+    tty: true
+    stdin_open: true
+    command: /bin/bash
